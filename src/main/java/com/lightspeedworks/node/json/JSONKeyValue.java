@@ -20,8 +20,10 @@ public class JSONKeyValue extends JSON {
 	/**
 	 * constractor. {コンストラクタ}
 	 *
-	 * @param objKey object key value {オブジェクト・キー値}
-	 * @param objJSON JSON object value {JSONオブジェクト値}
+	 * @param objKey
+	 *            object key value {オブジェクト・キー値}
+	 * @param objJSON
+	 *            JSON object value {JSONオブジェクト値}
 	 */
 	public JSONKeyValue(Object objKey, JSON objJSON) {
 		this.strKey = objKey.toString();
@@ -31,8 +33,10 @@ public class JSONKeyValue extends JSON {
 	/**
 	 * constractor. {コンストラクタ}
 	 *
-	 * @param strKey string key value {文字列キー値}
-	 * @param objJSON JSON object value {JSONオブジェクト値}
+	 * @param strKey
+	 *            string key value {文字列キー値}
+	 * @param objJSON
+	 *            JSON object value {JSONオブジェクト値}
 	 */
 	public JSONKeyValue(String strKey, JSON objJSON) {
 		this.strKey = strKey;
@@ -42,8 +46,10 @@ public class JSONKeyValue extends JSON {
 	/**
 	 * constractor. {コンストラクタ}
 	 *
-	 * @param intKey int key value {整数キー値}
-	 * @param objJSON JSON object value {JSONオブジェクト値}
+	 * @param intKey
+	 *            int key value {整数キー値}
+	 * @param objJSON
+	 *            JSON object value {JSONオブジェクト値}
 	 */
 	public JSONKeyValue(int intKey, JSON objJSON) {
 		this.strKey = Integer.toString(intKey);
@@ -104,7 +110,8 @@ public class JSONKeyValue extends JSON {
 	}
 
 	/**
-	 * returns string key of JSON Key Value object. {JSONキー・バリュー・オブジェクトの文字列キーを返す}
+	 * returns string key of JSON Key Value object.
+	 * {JSONキー・バリュー・オブジェクトの文字列キーを返す}
 	 *
 	 * @return key string {キー文字列}
 	 */
@@ -139,5 +146,68 @@ public class JSONKeyValue extends JSON {
 	 */
 	public JSON valueJSON() {
 		return objJSON;
+	}
+
+	/**
+	 * returns element of array or object by int key.
+	 * {配列もしくはオブジェクトの要素を取得する(整数キーによる)}
+	 *
+	 * @param intKey
+	 *            int key {整数キー}
+	 * @return JSON object {JSONオブジェクト}
+	 */
+	public JSON get(int intKey) {
+		return objJSON.get(intKey);
+	}
+
+	/**
+	 * returns element of array or object by string key.
+	 * {配列もしくはオブジェクトの要素を取得する(文字列キーによる)}
+	 *
+	 * @param strKey
+	 *            string key {文字列キー}
+	 * @return JSON object {JSONオブジェクト}
+	 */
+	public JSON get(String strKey) {
+		return objJSON.get(strKey);
+	}
+
+	/**
+	 * sets element into array or object and return self by int key.
+	 * {配列もしくはオブジェクトに要素を設定する(整数キーによる)}
+	 *
+	 * @param intKey
+	 *            int key {整数キー}
+	 * @param objJSON
+	 *            JSON object {JSONオブジェクト}
+	 * @return JSON object {JSONオブジェクト}
+	 */
+	public JSON put(int intKey, JSON objJSON) {
+		return this.objJSON.put(intKey, objJSON);
+	}
+
+	/**
+	 * sets element into array or object and return self by string key.
+	 * {配列もしくはオブジェクトに要素を設定する(文字列キーによる)}
+	 *
+	 * @param strKey
+	 *            string key {文字列キー}
+	 * @param objJSON
+	 *            JSON object {JSONオブジェクト}
+	 * @return JSON object {JSONオブジェクト}
+	 */
+	public JSON put(String strKey, JSON objJSON) {
+		return this.objJSON.put(strKey, objJSON);
+	}
+
+	/**
+	 * push a JSON object value into JSON array. {JSONオブジェクト値をJSON配列に追加する}
+	 *
+	 * @param objJSON
+	 *            JSON object value {JSONオブジェクト値}
+	 * @return JSON object
+	 */
+	public JSON push(JSON objJSON) {
+		return this.objJSON.push(objJSON);
 	}
 }
