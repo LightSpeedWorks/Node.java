@@ -402,6 +402,102 @@ public abstract class JSON implements Iterable<JSON> {
 	}
 
 	/**
+	 * returns element of array or object by string key.
+	 * {配列もしくはオブジェクトの要素を取得する(文字列キーによる)}
+	 *
+	 * @param strKey
+	 *            string key {文字列キー}
+	 * @return String {文字列}
+	 */
+	public String getString(String strKey) {
+		JSON obj = get(strKey);
+		if (obj == null)
+			return "";
+		return (String) obj.valueOf();
+	}
+
+	/**
+	 * returns element of array or object by string key.
+	 * {配列もしくはオブジェクトの要素を取得する(文字列キーによる)}
+	 *
+	 * @param strKey
+	 *            string key {文字列キー}
+	 * @param defaultValue
+	 *            string default value {デフォルト値(文字列)}
+	 * @return String {文字列}
+	 */
+	public String getString(String strKey, String defaultValue) {
+		JSON obj = get(strKey);
+		if (obj == null)
+			return defaultValue;
+		return (String) obj.valueOf();
+	}
+
+	/**
+	 * returns element of array or object by string key.
+	 * {配列もしくはオブジェクトの要素を取得する(文字列キーによる)}
+	 *
+	 * @param strKey
+	 *            string key {文字列キー}
+	 * @return int {整数}
+	 */
+	public int getInteger(String strKey) {
+		JSON obj = get(strKey);
+		if (obj == null)
+			return 0;
+		return (Integer) obj.valueOf();
+	}
+
+	/**
+	 * returns element of array or object by string key.
+	 * {配列もしくはオブジェクトの要素を取得する(文字列キーによる)}
+	 *
+	 * @param strKey
+	 *            string key {文字列キー}
+	 * @param defaultValue
+	 *            int default value {デフォルト値(整数)}
+	 * @return int {整数}
+	 */
+	public int getInteger(String strKey, int defaultValue) {
+		JSON obj = get(strKey);
+		if (obj == null)
+			return defaultValue;
+		return (Integer) obj.valueOf();
+	}
+
+	/**
+	 * returns element of array or object by string key.
+	 * {配列もしくはオブジェクトの要素を取得する(文字列キーによる)}
+	 *
+	 * @param strKey
+	 *            string key {文字列キー}
+	 * @return boolean {ブーリアン}
+	 */
+	public boolean getBoolean(String strKey) {
+		JSON obj = get(strKey);
+		if (obj == null)
+			return false;
+		return (Boolean) obj.valueOf();
+	}
+
+	/**
+	 * returns element of array or object by string key.
+	 * {配列もしくはオブジェクトの要素を取得する(文字列キーによる)}
+	 *
+	 * @param strKey
+	 *            string key {文字列キー}
+	 * @param defaultValue
+	 *            boolean default value {デフォルト値(ブーリアン)}
+	 * @return boolean {ブーリアン}
+	 */
+	public boolean getBoolean(String strKey, boolean defaultValue) {
+		JSON obj = get(strKey);
+		if (obj == null)
+			return defaultValue;
+		return (Boolean) obj.valueOf();
+	}
+
+	/**
 	 * sets element into array or object and return self by int key.
 	 * {配列もしくはオブジェクトに要素を設定する(整数キーによる)}
 	 *
@@ -673,7 +769,7 @@ public abstract class JSON implements Iterable<JSON> {
 	 * @throws Exception
 	 *             {例外}
 	 */
-	private static JSON parse(String strJSON, int n, int pos, int[] nextPos) throws Exception {
+	static JSON parse(String strJSON, int n, int pos, int[] nextPos) throws Exception {
 		// int n = str.length(); // for performance
 
 		int i = skipWhiteSpaces(strJSON, n, pos);
@@ -1047,15 +1143,15 @@ public abstract class JSON implements Iterable<JSON> {
 	}
 
 	/**
-	 * to Ini File format string. {INIファイル形式文字列}
+	 * returns Ini File format string. {INIファイル形式文字列を返す}
 	 *
-	 * @param section
-	 *            String {セクション文字列}
 	 * @param key
-	 *            String {キー文字列}
+	 *            key String {キー文字列}
+	 * @param section
+	 *            section String {セクション文字列}
 	 * @return String ini File format string {INIファイル形式文字列}
 	 */
-	private String toIniFile(String section, String key) {
+	String toIniFile(String key, String section) {
 		StringBuilder sb = new StringBuilder();
 		String nextSection;
 
@@ -1134,7 +1230,7 @@ public abstract class JSON implements Iterable<JSON> {
 				sb.append(LINE_SEPARATOR);
 
 				for (JSON e : simpleObj) {
-					sb.append(e.toIniFile(nextSection, e.key()));
+					sb.append(e.toIniFile(e.key(), nextSection));
 				}
 			}
 
@@ -1146,7 +1242,7 @@ public abstract class JSON implements Iterable<JSON> {
 				nextSection = section + CHAR_SECTION_SEPARATOR + key;
 
 			for (JSON e : complexObj) {
-				sb.append(e.toIniFile(nextSection, e.key()));
+				sb.append(e.toIniFile(e.key(), nextSection));
 			}
 			break;
 		default:
