@@ -11,11 +11,11 @@ public class JSONKeyValue extends JSON {
 	/**
 	 * string key value. {文字列キー値}
 	 */
-	private String strKey = "";
+	String strKey = "";
 	/**
 	 * JSON object value. {JSONオブジェクト値}
 	 */
-	private JSON objJSON = null;
+	JSON objJSON = null;
 
 	/**
 	 * constractor. {コンストラクタ}
